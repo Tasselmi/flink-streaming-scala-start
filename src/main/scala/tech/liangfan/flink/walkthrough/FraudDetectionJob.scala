@@ -6,22 +6,22 @@ import org.apache.flink.walkthrough.common.source.TransactionSource
 
 object FraudDetectionJob {
 
-  def main(args: Array[String]): Unit = {
-    val env = StreamExecutionEnvironment.getExecutionEnvironment
+    def main(args: Array[String]): Unit = {
+        val env = StreamExecutionEnvironment.getExecutionEnvironment
 
-    val transactions = env
-      .addSource(new TransactionSource)
-      .name("transactions")
+        val transactions = env
+            .addSource(new TransactionSource)
+            .name("transactions")
 
-    val alerts = transactions
-      .keyBy(tran => tran.getAccountId)
-      .process(new FraudDetector)
-      .name("fraud-detector")
+        val alerts = transactions
+            .keyBy(tran => tran.getAccountId)
+            .process(new FraudDetector)
+            .name("fraud-detector")
 
-    alerts.addSink(new AlertSink).name("log-fraud-id")
-    alerts.print().name("stdout-fraud-id")
+        alerts.addSink(new AlertSink).name("log-fraud-id")
+        alerts.print().name("stdout-fraud-id")
 
-    env.execute("fraud-detection-job")
-  }
+        env.execute("fraud-detection-job")
+    }
 
 }
