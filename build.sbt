@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
 	"org.apache.flink" % "flink-core" % flinkVersion,
 	"org.apache.flink" %% "flink-streaming-scala" % flinkVersion,
 	"org.apache.flink" %% "flink-scala" % flinkVersion,
-	"org.apache.flink" % "flink-walkthrough-common_2.11" % flinkVersion
+	"org.apache.flink" % "flink-walkthrough-common_2.11" % flinkVersion,
+	"org.apache.flink" %% "flink-connector-kafka-0.10" % flinkVersion
 )

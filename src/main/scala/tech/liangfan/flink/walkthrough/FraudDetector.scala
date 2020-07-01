@@ -22,9 +22,9 @@ class FraudDetector extends KeyedProcessFunction[Long, Transaction, Alert] {
         context: KeyedProcessFunction[Long, Transaction, Alert]#Context,
         collector: Collector[Alert]): Unit = {
 
-        val lastTranscationWasSmall: lang.Boolean = flagState.value()
+        val lastTransactionWasSmall: lang.Boolean = flagState.value()
 
-        if (lastTranscationWasSmall != null) {
+        if (lastTransactionWasSmall != null) {
             if (transaction.getAmount > FraudDetector.LARGE_AMOUNT) {
                 val alert = new Alert
                 alert.setId(transaction.getAccountId)
