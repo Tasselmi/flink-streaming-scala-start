@@ -182,6 +182,7 @@ public class Chapter02 {
         conn.hset("login:", token, user);
         conn.zadd("recent:", timestamp, token);
         if (item != null) {
+            //这里是不是用事务包一层好一点，以防有的命令失败有的成功
             conn.zadd("viewed:" + token, timestamp, item);
             conn.zremrangeByRank("viewed:" + token, 0, -26);
             conn.zincrby("viewed:", -1, item);
